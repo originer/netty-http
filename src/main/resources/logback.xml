@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %p [%c{1}] %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--<level>INFO</level>-->
+        </filter>
+    </appender>
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/netty-http/log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/netty-http/log-%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/netty-http/log.err</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/netty-http/log-%d{yyyyMMdd}.err</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="API_CLICK" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/click/click.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/click/click-%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="API_OFFER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/click-offer/offer.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/click-offer/offer-%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="API_CLICK_INVALID" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/click-invalid/click.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/click-invalid/click-%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="API_SUB_MAPPING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/submapping/submapping.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/submapping/submapping-%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="HTTP_ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/data/logs/netty-http/access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/data/logs/netty-http/access-%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="offerLog" level="info" additivity="false">
+        <appender-ref ref="API_OFFER"/>
+    </logger>
+    <logger name="clickLog" level="info" additivity="false">
+        <appender-ref ref="API_CLICK"/>
+    </logger>
+    <logger name="clickLog-invalid" level="info" additivity="false">
+        <appender-ref ref="API_CLICK_INVALID"/>
+    </logger>
+    <logger name="subMappingLog" level="info" additivity="false">
+        <appender-ref ref="API_SUB_MAPPING"/>
+    </logger>
+    <logger name="accessLog" level="info" additivity="false">
+        <appender-ref ref="HTTP_ACCESS"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="ERROR"/>
+    </root>
+</configuration>
